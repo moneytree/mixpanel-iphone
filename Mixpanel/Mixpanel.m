@@ -1258,18 +1258,20 @@ static Mixpanel *sharedInstance = nil;
 
 - (void)showMiniNotificationWithObject:(MPNotification *)notification
 {
-    MPMiniNotificationViewController *controller = [[MPMiniNotificationViewController alloc] init];
-    controller.notification = notification;
-    controller.delegate = self;
-    self.notificationViewController = controller;
-
-    [controller showWithAnimation];
-
-    double delayInSeconds = 5.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self notificationController:controller wasDismissedWithStatus:NO];
-    });
+  // TODO: Moneytree is not currently using this and this class uses a deprecated method on iOS 7.
+  // Currently comment out this method until the isses are ressolved on the mixpanel side.
+//    MPMiniNotificationViewController *controller = [[MPMiniNotificationViewController alloc] init];
+//    controller.notification = notification;
+//    controller.delegate = self;
+//    self.notificationViewController = controller;
+//
+//    [controller showWithAnimation];
+//
+//    double delayInSeconds = 5.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        [self notificationController:controller wasDismissedWithStatus:NO];
+//    });
 }
 
 - (void)notificationController:(MPNotificationViewController *)controller wasDismissedWithStatus:(BOOL)status
