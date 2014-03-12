@@ -386,6 +386,8 @@ static Mixpanel *sharedInstance = nil;
 
 + (void)assertPropertyTypes:(NSDictionary *)properties
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
     for (id k in properties) {
         NSAssert([k isKindOfClass: [NSString class]], @"%@ property keys must be NSString. got: %@ %@", self, [k class], k);
         // would be convenient to do: id v = [properties objectForKey:k]; but
@@ -401,6 +403,7 @@ static Mixpanel *sharedInstance = nil;
                  [properties[k] isKindOfClass:[NSURL class]],
                  @"%@ property values must be NSString, NSNumber, NSNull, NSArray, NSDictionary, NSDate or NSURL. got: %@ %@", self, [properties[k] class], properties[k]);
     }
+#pragma clang diagnostic pop
 }
 
 - (NSString *)defaultDistinctId
@@ -1465,11 +1468,14 @@ static Mixpanel *sharedInstance = nil;
 
 - (void)increment:(NSDictionary *)properties
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
     NSAssert(properties != nil, @"properties must not be nil");
     for (id v in [properties allValues]) {
         NSAssert([v isKindOfClass:[NSNumber class]],
                  @"%@ increment property values should be NSNumber. found: %@", self, v);
     }
+#pragma clang diagnostic push
     [self addPeopleRecordToQueueWithAction:@"$add" andProperties:properties];
 }
 
@@ -1492,11 +1498,14 @@ static Mixpanel *sharedInstance = nil;
 
 - (void)union:(NSDictionary *)properties
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
     NSAssert(properties != nil, @"properties must not be nil");
     for (id v in [properties allValues]) {
         NSAssert([v isKindOfClass:[NSArray class]],
                  @"%@ union property values should be NSArray. found: %@", self, v);
     }
+#pragma clang diagnostic pop
     [self addPeopleRecordToQueueWithAction:@"$union" andProperties:properties];
 }
 
