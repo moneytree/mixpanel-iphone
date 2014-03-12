@@ -21,7 +21,7 @@
 #import "NSData+MPBase64.h"
 #import "UIView+MPSnapshotImage.h"
 
-#define VERSION @"2.3.1"
+#define VERSION @"2.3.2"
 
 #ifdef MIXPANEL_LOG
 #define MixpanelLog(...) NSLog(__VA_ARGS__)
@@ -1325,7 +1325,7 @@ static Mixpanel *sharedInstance = nil;
                                          @"campaign_id": @(notification.ID),
                                          @"message_id": @(notification.messageID),
                                          @"type": @"inapp",
-                                         @"time": @([NSDate timeIntervalSinceReferenceDate])
+                                         @"time": [NSDate date]
                                          }
                                  };
 
